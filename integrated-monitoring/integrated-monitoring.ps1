@@ -2,6 +2,7 @@
     .SYNOPSIS
         Installs GuestAttestation extension
     .DESCRIPTION
+        #name: Integrated Monitoring
         #description: Installs the native Azure "GuestAttestation" Extension on the Azure VM
         #execution mode: IndividualWithRestart
         #tags: Nerdio
