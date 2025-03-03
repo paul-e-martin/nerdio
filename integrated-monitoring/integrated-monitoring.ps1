@@ -2,10 +2,9 @@
     .SYNOPSIS
         Installs GuestAttestation extension
     .DESCRIPTION
-        #name: Integrated Monitoring
         #description: Installs the native Azure "GuestAttestation" Extension on the Azure VM
         #execution mode: IndividualWithRestart
-        #tags: Nerdio
+        #tags: Monitoring
 
     .NOTES
         This Script will install the Microsoft GuestAttestation extension on the Azure VM.

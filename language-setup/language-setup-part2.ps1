@@ -1,8 +1,14 @@
 <#
+    .SYNOPSIS
+        Sets region and locale settings.
     .DESCRIPTION
-    Language Setup Part 2
-#>
+        #description: Language Setup Part 2.
+        #execution mode: IndividualWithRestart
+        #tags: Language
 
+    .NOTES
+        This Script will set the required culture, override, location, timezone, and copy settings to system and new accounts.
+#>
 begin {
     $primaryLanguage = 'en-GB'
     $secondaryLanguage = 'en-US'

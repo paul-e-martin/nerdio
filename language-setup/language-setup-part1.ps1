@@ -1,6 +1,13 @@
 <#
+    .SYNOPSIS
+        Installs Language Pack and capabilities.
     .DESCRIPTION
-    Language Setup Part 1
+        #description: Language Setup Part 1.
+        #execution mode: IndividualWithRestart
+        #tags: Language
+
+    .NOTES
+        This Script will download and install the required language pack and set the system locale.
 #>
 
 begin {

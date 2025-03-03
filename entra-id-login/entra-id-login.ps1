@@ -2,9 +2,9 @@
     .SYNOPSIS
         Installs Entra ID Login extension
     .DESCRIPTION
-        Installs the native Azure "ADDLogin" Extension on the Azure VM
+        #description: Installs the native Azure "ADDLogin" Extension on the Azure VM
         #execution mode: IndividualWithRestart
-        #tags: Nerdio
+        #tags: EntraID
 
     .NOTES
         This Script will install the Microsoft AADLogin extension on the Azure VM.
