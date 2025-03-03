@@ -2,7 +2,7 @@
     .SYNOPSIS
         Installs GuestAttestation extension
     .DESCRIPTION
-        Installs the native Azure "GuestAttestation" Extension on the Azure VM
+        #description: Installs the native Azure "GuestAttestation" Extension on the Azure VM
         #execution mode: IndividualWithRestart
         #tags: Nerdio
 
