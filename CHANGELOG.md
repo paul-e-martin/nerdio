@@ -1,3 +1,9 @@
+## v0.2.0 (2025-03-04)
+
+### Feat
+
+- Add logging functionality to PowerShell scripts for better traceability (#3)
+
 ## v0.1.1 (2025-03-04)
 
 ### Fix
