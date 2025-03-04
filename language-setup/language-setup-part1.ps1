@@ -109,22 +109,22 @@ process {
                 "Microsoft-Windows-LanguageFeatures-TextToSpeech-$($lang.toLower())-Package~31bf3856ad364e35~amd64~~.cab"
             )
 
-            foreach ($Capability in $Capabilities) {
-                if ($Capability = (Get-WindowsCapability -Online | Where-Object { $_.Name -match "$lang" -and $_.Name -match $capability.Split("-")[3] }).State -ne "Installed") {
+            foreach ($capability in $capabilities) {
+                if ($capability = (Get-WindowsCapability -Online | Where-Object { $_.Name -match "$lang" -and $_.Name -match $capability.Split("-")[3] }).State -ne "Installed") {
 
                     $capabilityUri = "$blob_root/$capability"
 
                     # Windows Capability Download
-                    Write-Host "Downloading $($Capability.Name)"
+                    Write-Host "Downloading $($capability.Name)"
                     Start-BitsTransfer -Source $capabilityUri -Destination "$env:SYSTEMROOT\Temp\$(Split-Path $capabilityUri -Leaf)"
-                    Write-Host "$($Capability.Name) downloaded"
+                    Write-Host "$($capability.Name) downloaded"
                     $file = Get-Item -Path "$env:SYSTEMROOT\Temp\$(Split-Path $capabilityUri -Leaf)"
                     Unblock-File -Path $file.FullName -ErrorAction SilentlyContinue
 
                     # Windows Capability Install
-                    Write-Host "Installing $($Capability.Name)"
+                    Write-Host "Installing $($capability.Name)"
                     Add-WindowsPackage -Online -PackagePath $file.FullName -NoRestart
-                    Write-Host "$($Capability.Name) Installed"
+                    Write-Host "$($capability.Name) Installed"
 
                     # Remove file
                     $file | Remove-Item -Force
