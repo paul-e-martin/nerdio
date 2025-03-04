@@ -11,6 +11,24 @@
 #>
 
 begin {
+    $scriptName = "remove-apps"
+
+    # Start powershell logging
+    $SaveVerbosePreference = $VerbosePreference
+    $VerbosePreference = 'continue'
+    $VMTime = Get-Date
+    $LogTime = $VMTime.ToUniversalTime()
+
+    # Create the directory if it doesn't exist
+    if (!(Test-Path -Path "$env:SYSTEMROOT\Temp\NerdioManagerLogs\ScriptedActions\$scriptName")) {
+        New-Item -ItemType Directory -Path "$env:SYSTEMROOT\Temp\NerdioManagerLogs\ScriptedActions\$scriptName"
+    }
+
+    # start logging
+    Start-Transcript -Path "$env:SYSTEMROOT\temp\NerdioManagerLogs\ScriptedActions\$scriptName\ps_log.txt" -Append
+    Write-Host "################# New Script Run #################"
+    Write-host "Current time (UTC-0): $LogTime"
+
     # Get list of Provisioned Start Screen Apps
     $Apps = Get-ProvisionedAppxPackage -Online
 }
@@ -75,4 +93,10 @@ process {
             #Write-Log -Object "Hardening" -Message "Removed $($App.DisplayName)" -Severity Information -LogPath $LogPath
         }
     }
+}
+
+end {
+    # End Logging
+    Stop-Transcript
+    $VerbosePreference = $SaveVerbosePreference
 }

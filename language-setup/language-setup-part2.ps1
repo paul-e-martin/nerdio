@@ -57,6 +57,8 @@ begin {
         }
     }
 
+    $scriptName = "language-setup"
+
     # Start powershell logging
     $SaveVerbosePreference = $VerbosePreference
     $VerbosePreference = 'continue'
@@ -64,12 +66,12 @@ begin {
     $LogTime = $VMTime.ToUniversalTime()
 
     # Create the directory if it doesn't exist
-    if (!(Test-Path -Path "$env:SYSTEMROOT\Temp\NerdioManagerLogs\ScriptedActions\languageSetup")) {
-        New-Item -ItemType Directory -Path "$env:SYSTEMROOT\Temp\NerdioManagerLogs\ScriptedActions\languageSetup"
+    if (!(Test-Path -Path "$env:SYSTEMROOT\Temp\NerdioManagerLogs\ScriptedActions\$scriptName")) {
+        New-Item -ItemType Directory -Path "$env:SYSTEMROOT\Temp\NerdioManagerLogs\ScriptedActions\$scriptName"
     }
 
     # start logging
-    Start-Transcript -Path "$env:SYSTEMROOT\temp\NerdioManagerLogs\ScriptedActions\languageSetup\ps_log.txt" -Append
+    Start-Transcript -Path "$env:SYSTEMROOT\temp\NerdioManagerLogs\ScriptedActions\$scriptName\ps_log.txt" -Append
     Write-Host "################# New Script Run #################"
     Write-host "Current time (UTC-0): $LogTime"
 }
