@@ -1,3 +1,9 @@
+## v0.2.1 (2025-03-04)
+
+### Fix
+
+- Correct assignment operator in language setup script condition (#4)
+
 ## v0.2.0 (2025-03-04)
 
 ### Feat
