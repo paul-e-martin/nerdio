@@ -1,3 +1,9 @@
+## v0.3.0 (2025-03-04)
+
+### Feat
+
+- Add file cleanup after Windows package installation in language setup script (#5)
+
 ## v0.2.1 (2025-03-04)
 
 ### Fix
