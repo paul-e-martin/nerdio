@@ -10,12 +10,52 @@
         This Script will set the required culture, override, location, timezone, and copy settings to system and new accounts.
 #>
 begin {
-    $primaryLanguage = 'en-GB'
-    $secondaryLanguage = 'en-US'
-    $primaryInputCode = '0809:00000809'
-    $secondaryInputCode = '0409:00000409'
-    $primaryGeoID = '242'
-    $timeZone = 'GMT Standard Time'
+    $primaryLanguage = if (-not [string]::IsNullOrEmpty($SecureVars.primaryLanguage)) {
+        $SecureVars.primaryLanguage
+    }
+    else {
+        $InheritedVars.primaryLanguage
+    }
+
+    $secondaryLanguage = if (-not [string]::IsNullOrEmpty($SecureVars.secondaryLanguage)) {
+        $SecureVars.secondaryLanguage
+    }
+    else {
+        $InheritedVars.secondaryLanguage
+    }
+
+    $languageProperties = @{
+        "en-GB" = @{
+            InputCode = "0809:00000809"
+            GeoID     = "242"
+            TimeZone  = "GMT Standard Time"
+        }
+        "en-US" = @{
+            InputCode = "0409:00000409"
+            GeoID     = "244"
+            TimeZone  = "Central Daylight Time"
+        }
+        "fr-FR" = @{
+            InputCode = "040C:0000040C"
+            GeoID     = "84"
+            TimeZone  = "Central European Summer Time"
+        }
+        "de-DE" = @{
+            InputCode = "0407:00000407"
+            GeoID     = "94"
+            TimeZone  = "Central European Summer Time"
+        }
+        "it-IT" = @{
+            InputCode = "0410:00000410"
+            GeoID     = "118"
+            TimeZone  = "Central European Summer Time"
+        }
+        "es-ES" = @{
+            InputCode = "0C0A:0000040A"
+            GeoID     = "217"
+            TimeZone  = "Central European Summer Time"
+        }
+    }
 
     # Start powershell logging
     $SaveVerbosePreference = $VerbosePreference
@@ -44,21 +84,21 @@ process {
     Write-Host "UI Language set to $primaryLanguage"
 
     # Set Location
-    Set-WinHomeLocation -GeoId $primaryGeoID
-    Write-Host "Location set to $primaryGeoID"
+    Set-WinHomeLocation -GeoId $languageProperties[$primaryLanguage].GeoID
+    Write-Host "Location set to $($languageProperties[$primaryLanguage].GeoID)"
 
     # Set Input Method
     $NewLanguageList = New-WinUserLanguageList -Language "$primaryLanguage"
     $NewLanguageList.Add([Microsoft.InternationalSettings.Commands.WinUserLanguage]::new("$secondaryLanguage"))
     $NewLanguageList[1].InputMethodTips.Clear()
-    $NewLanguageList[1].InputMethodTips.Add("$primaryInputCode")
-    $NewLanguageList[1].InputMethodTips.Add("$secondaryInputCode")
+    $NewLanguageList[1].InputMethodTips.Add("$($languageProperties[$primaryLanguage].InputCode)")
+    $NewLanguageList[1].InputMethodTips.Add("$($languageProperties[$secondaryLanguage].InputCode)")
     Set-WinUserLanguageList -LanguageList $NewLanguageList -Force
     Write-Host "Keyboard input set"
 
     # Set Timezone
-    Set-TimeZone -Name "$timeZone"
-    Write-Host "Timezone set to $timeZone"
+    Set-TimeZone -Name $languageProperties[$primaryLanguage].TimeZone
+    Write-Host "Timezone set to $($languageProperties[$primaryLanguage].TimeZone)"
 
     # Create XML Content
     $XML = @"
@@ -71,7 +111,7 @@ process {
 
 <!-- GeoID -->
 <gs:LocationPreferences>
-<gs:GeoID Value='$primaryGeoID'/>
+<gs:GeoID Value='$($languageProperties[$primaryLanguage].GeoID)'/>
 </gs:LocationPreferences>
 
 <gs:MUILanguagePreferences>
@@ -84,8 +124,8 @@ process {
 
 <!-- input preferences -->
 <gs:InputPreferences>
-<gs:InputLanguageID Action="add" ID='$primaryInputCode' Default="true"/>
-<gs:InputLanguageID Action="add" ID='$secondaryInputCode'/>
+<gs:InputLanguageID Action="add" ID='$($languageProperties[$primaryLanguage].InputCode)' Default="true"/>
+<gs:InputLanguageID Action="add" ID='$($languageProperties[$secondaryLanguage].InputCode)'/>
 </gs:InputPreferences>
 
 <!-- user locale -->
