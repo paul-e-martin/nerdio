@@ -1,3 +1,9 @@
+## v0.1.1 (2025-03-04)
+
+### Fix
+
+- Update language setup script to use blob storage for language packs and capabilities (#2)
+
 ## v0.1.0 (2025-03-04)
 
 ### Feat
