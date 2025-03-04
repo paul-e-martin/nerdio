@@ -35,7 +35,6 @@ begin {
         $languages += $additionalLanguages.Split(';')
     }
 
-
     # Get OS Name
     $osName = (Get-ComputerInfo).OsName
     $os = if ($osName -match "Server \d+") {
@@ -49,15 +48,14 @@ begin {
     else {
         $osName
     }
-    $gitlab_root = "https://raw.githubusercontent.com/ondemand-engineering"
-    $repo_root = "$gitlab_root/windows-language-setup/refs/heads/main/language_packs/$os"
+    $storage_account = "https://mcduksstoracc001.blob.core.windows.net"
+    $blob_root = "$storage_account/media/windows/language_packs/$os"
 
     # Start powershell logging
     $SaveVerbosePreference = $VerbosePreference
     $VerbosePreference = 'continue'
     $VMTime = Get-Date
     $LogTime = $VMTime.ToUniversalTime()
-
 
     # Create the directory if it doesn't exist
     if (!(Test-Path -Path "$env:SYSTEMROOT\Temp\NerdioManagerLogs\ScriptedActions\languageSetup")) {
@@ -80,7 +78,7 @@ process {
     foreach ($lang in ($languages | Where-Object { $_ -ne 'en-US' })) {
         if (!(Get-WindowsPackage -Online | Where-Object { $_.ReleaseType -eq "LanguagePack" -and $_.PackageName -like "*LanguagePack*$lang*" })) {
 
-            $languagePackUri = "$repo_root/Microsoft-Windows-$type-Language-Pack_x64_$($lang.toLower()).cab"
+            $languagePackUri = "$blob_root/Microsoft-Windows-$type-Language-Pack_x64_$($lang.toLower()).cab"
 
             # Language Pack Download
             Write-Host "Downloading language pack"
@@ -112,7 +110,7 @@ process {
             foreach ($Capability in $Capabilities) {
                 if ((Get-WindowsCapability -Online | Where-Object { $_.Name -match "$lang" -and $_.Name -match $capability.Split("-")[3] }).State -ne "Installed") {
 
-                    $capabilityUri = "$repo_root/$capability"
+                    $capabilityUri = "$blob_root/$capability"
 
                     # Windows Capability Download
                     Write-Host "Downloading $($Capability.Name)"
