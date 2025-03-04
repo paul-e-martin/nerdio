@@ -1,3 +1,9 @@
+## v0.3.1 (2025-03-04)
+
+### Fix
+
+- Correct variable casing in language setup script for consistency (#6)
+
 ## v0.3.0 (2025-03-04)
 
 ### Feat
