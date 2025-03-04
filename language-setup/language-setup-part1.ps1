@@ -125,6 +125,9 @@ process {
                     Write-Host "Installing $($Capability.Name)"
                     Add-WindowsPackage -Online -PackagePath $file.FullName -NoRestart
                     Write-Host "$($Capability.Name) Installed"
+
+                    # Remove file
+                    $file | Remove-Item -Force
                 }
             }
         }
