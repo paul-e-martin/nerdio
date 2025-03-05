@@ -1,3 +1,9 @@
+## v0.4.4 (2025-03-05)
+
+### Refactor
+
+- Correct variable assignment and improve output messages in language setup script (#12)
+
 ## v0.4.3 (2025-03-05)
 
 ### Refactor
