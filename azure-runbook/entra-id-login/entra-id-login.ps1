@@ -17,19 +17,27 @@ Set-AzContext -SubscriptionId $AzureSubscriptionId
 $AzVM = Get-AzVM -Name $AzureVMName -ResourceGroupName $AzureResourceGroupName
 $PublisherName = "Microsoft.Azure.ActiveDirectory"
 $Type = "AADLoginForWindows"
-$name = 'AADLogin'
+$ExtensionName = 'AADLogin'
 
-# Get the latest major version
-$version = ((Get-AzVMExtensionImage -Location $AzVM.Location -PublisherName $PublisherName -Type $Type).Version[-1][0..2] -join '')
+# Check if the extension is already installed
+$extension = Get-AzVMExtension -ResourceGroupName $AzureResourceGroupName -VMName $AzureVMName -Name $ExtensionName -ErrorAction SilentlyContinue
 
-#enable the Microsoft Active Directory Login Extension
-$AADExtension = @{
-    ResourceGroupName  = $AzVM.ResourceGroupName
-    Location           = $AzVM.Location
-    VMName             = $AzureVMName
-    Name               = $name
-    Publisher          = $PublisherName
-    ExtensionType      = $Type
-    TypeHandlerVersion = $version
+if ($null -eq $extension) {
+    # Get the latest major version
+    $version = ((Get-AzVMExtensionImage -Location $AzVM.Location -PublisherName $PublisherName -Type $Type).Version[-1][0..2] -join '')
+
+    #enable the Microsoft Active Directory Login Extension
+    $AADExtension = @{
+        ResourceGroupName  = $AzVM.ResourceGroupName
+        Location           = $AzVM.Location
+        VMName             = $AzureVMName
+        Name               = $ExtensionName
+        Publisher          = $PublisherName
+        ExtensionType      = $Type
+        TypeHandlerVersion = $version
+    }
+    Set-AzVMExtension @AADExtension
 }
-Set-AzVMExtension @AADExtension
+else {
+    Write-Output "The $ExtensionName extension is already installed on the VM."
+}
