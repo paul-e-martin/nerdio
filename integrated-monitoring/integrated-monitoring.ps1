@@ -3,7 +3,7 @@
         Installs GuestAttestation extension
     .DESCRIPTION
         #description: Installs the native Azure "GuestAttestation" Extension on the Azure VM
-        #execution mode: IndividualWithRestart
+        #execution mode: Combined
         #tags: Monitoring
 
     .NOTES

@@ -45,6 +45,7 @@ process {
         'Microsoft.549981C3F5F10',
         'Microsoft.BingFinance',
         'Microsoft.BingNews',
+        'Microsoft.BingSearch',
         'Microsoft.BingSports',
         'Microsoft.BingWeather',
         'Microsoft.CommsPhone',
