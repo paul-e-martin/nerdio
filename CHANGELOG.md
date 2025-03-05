@@ -1,3 +1,9 @@
+## v0.4.2 (2025-03-05)
+
+### Refactor
+
+- Simplify variable initialization and context setup in Entra ID and Integrated Monitoring scripts (#10)
+
 ## v0.4.1 (2025-03-05)
 
 ### Refactor
