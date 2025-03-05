@@ -1,3 +1,9 @@
+## v0.4.0 (2025-03-05)
+
+### Feat
+
+- Migrate Entra ID and Integrated Monitoring scripts to new directory structure (#8)
+
 ## v0.3.2 (2025-03-05)
 
 ### Fix
