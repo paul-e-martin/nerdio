@@ -3,7 +3,7 @@
         Installs Entra ID Login extension
     .DESCRIPTION
         #description: Installs the native Azure "ADDLogin" Extension on the Azure VM
-        #execution mode: IndividualWithRestart
+        #execution mode: Combined
         #tags: EntraID
 
     .NOTES
