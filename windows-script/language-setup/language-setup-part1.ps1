@@ -110,21 +110,21 @@ process {
             )
 
             foreach ($capability in $capabilities) {
-                if ($capability = (Get-WindowsCapability -Online | Where-Object { $_.Name -match "$lang" -and $_.Name -match $capability.Split("-")[3] }).State -ne "Installed") {
+                if ((Get-WindowsCapability -Online | Where-Object { $_.Name -match "$lang" -and $_.Name -match $capability.Split("-")[3] }).State -ne "Installed") {
 
                     $capabilityUri = "$blob_root/$capability"
 
                     # Windows Capability Download
-                    Write-Host "Downloading $($capability.Name)"
+                    Write-Host "Downloading $capability"
                     Start-BitsTransfer -Source $capabilityUri -Destination "$env:SYSTEMROOT\Temp\$(Split-Path $capabilityUri -Leaf)"
-                    Write-Host "$($capability.Name) downloaded"
+                    Write-Host "$capability downloaded"
                     $file = Get-Item -Path "$env:SYSTEMROOT\Temp\$(Split-Path $capabilityUri -Leaf)"
                     Unblock-File -Path $file.FullName -ErrorAction SilentlyContinue
 
                     # Windows Capability Install
-                    Write-Host "Installing $($capability.Name)"
+                    Write-Host "Installing $capability"
                     Add-WindowsPackage -Online -PackagePath $file.FullName -NoRestart
-                    Write-Host "$($capability.Name) Installed"
+                    Write-Host "$capability Installed"
 
                     # Remove file
                     $file | Remove-Item -Force
