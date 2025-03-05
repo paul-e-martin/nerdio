@@ -1,3 +1,9 @@
+## v0.4.1 (2025-03-05)
+
+### Refactor
+
+- Remove logging setup from Entra ID and Integrated Monitoring scripts for cleaner execution (#9)
+
 ## v0.4.0 (2025-03-05)
 
 ### Feat
