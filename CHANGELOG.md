@@ -1,3 +1,9 @@
+## v0.4.3 (2025-03-05)
+
+### Refactor
+
+- Check for existing VM extensions before installation in Entra ID and Integrated Monitoring scripts (#11)
+
 ## v0.4.2 (2025-03-05)
 
 ### Refactor
