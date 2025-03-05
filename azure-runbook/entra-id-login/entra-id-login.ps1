@@ -11,27 +11,6 @@
 #>
 
 begin {
-    $scriptName = "entra-id-login"
-
-    # Start powershell logging
-    $SaveVerbosePreference = $VerbosePreference
-    $VerbosePreference = 'continue'
-    $VMTime = Get-Date
-    $LogTime = $VMTime.ToUniversalTime()
-
-    # Create the directory if it doesn't exist
-    if (!(Test-Path -Path "$env:SYSTEMROOT\Temp\NerdioManagerLogs\ScriptedActions\$scriptName")) {
-        New-Item -ItemType Directory -Path "$env:SYSTEMROOT\Temp\NerdioManagerLogs\ScriptedActions\$scriptName"
-    }
-
-    # start logging
-    Start-Transcript -Path "$env:SYSTEMROOT\temp\NerdioManagerLogs\ScriptedActions\$scriptName\ps_log.txt" -Append
-    Write-Host "################# New Script Run #################"
-    Write-host "Current time (UTC-0): $LogTime"
-
-    # Set Error action
-    $errorActionPreference = "Stop"
-
     # Ensure context is using correct subscription
     Set-AzContext -SubscriptionId $AzureSubscriptionId
 
@@ -57,10 +36,4 @@ process {
         TypeHandlerVersion = $version
     }
     Set-AzVMExtension @AADExtension
-}
-
-end {
-    # End Logging
-    Stop-Transcript
-    $VerbosePreference = $SaveVerbosePreference
 }
