@@ -1,3 +1,9 @@
+## v0.3.2 (2025-03-05)
+
+### Fix
+
+- Update execution mode to Combined in Entra ID and Integrated Monitoring scripts; add BingSearch to removal list (#7)
+
 ## v0.3.1 (2025-03-04)
 
 ### Fix
