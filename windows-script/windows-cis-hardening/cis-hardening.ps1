@@ -464,16 +464,6 @@ process {
             }
         }
     }
-
-    # Enable Ping rules
-    Enable-NetFirewallRule -Name "FPS-ICMP4-ERQ-In"
-    Enable-NetFirewallRule -Name "FPS-ICMP6-ERQ-In"
-    Enable-NetFirewallRule -Name "FPS-ICMP4-ERQ-Out"
-    Enable-NetFirewallRule -Name "FPS-ICMP6-ERQ-Out"
-
-    # Enable WMI rules
-    Enable-NetFirewallRule -Name "WMI-RPCSS-In-TCP"
-    Enable-NetFirewallRule -Name "WMI-WINMGMT-In-TCP"
 }
 
 end {

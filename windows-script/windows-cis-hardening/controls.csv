@@ -121,7 +121,7 @@ ControlID,Description,ENABLED,Type,RegistryPath,RegistryProperty,RegistryType,Ne
 8273,Status of the 'Turn off Data Execution Prevention for Explorer' setting,TRUE,Registry,HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\Explorer,NoDataExecutionPrevention,DWord,,,,,0
 8274,Status of the 'Configure Windows Defender SmartScreen' setting,TRUE,Registry,HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\System,EnableSmartScreen,DWord,,,,,1
 8366,Status of the name of the 'Built-in Guest' account,TRUE,Account,,,,,,,,_Guest
-8367,Status of the name of the 'Built-in Administrator' account,FALSE,Account,,,,,,,,BuiltinAdministrator
+8367,Status of the name of the 'Built-in Administrator' account,TRUE,Account,,,,,,,,_Administrator
 8399,Status of the Configure 'Turn off app notifications on the lock screen',TRUE,Registry,HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\System,DisableLockScreenAppNotifications,DWord,,,,,1
 8425,Status of 'Do not display the password reveal button',TRUE,Registry,HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\CredUI,DisablePasswordReveal,DWord,,,,,1
 9003,Status of the 'Lock screen camera' setting,TRUE,Registry,HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\Personalization,NoLockScreenCamera,DWord,,,,,1
