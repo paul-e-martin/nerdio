@@ -1,3 +1,9 @@
+## v0.5.2 (2025-03-07)
+
+### Refactor
+
+- remove bloatware removal script (#15)
+
 ## v0.5.1 (2025-03-07)
 
 ### Refactor
