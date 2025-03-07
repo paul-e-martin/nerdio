@@ -1,3 +1,9 @@
+## v0.5.1 (2025-03-07)
+
+### Refactor
+
+- update firewall rules and enable built-in Administrator account in CIS hardening script (#14)
+
 ## v0.5.0 (2025-03-07)
 
 ### Feat
