@@ -1,3 +1,9 @@
+## v0.5.0 (2025-03-07)
+
+### Feat
+
+- added cis hardening (#13)
+
 ## v0.4.4 (2025-03-05)
 
 ### Refactor
