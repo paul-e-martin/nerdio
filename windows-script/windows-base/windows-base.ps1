@@ -4,7 +4,7 @@
 #>
 
 begin {
-    $pw = $SecureVars.windowsPassword
+    # $pw = $SecureVars.windowsPassword
 
     $scriptName = "windows-base"
 
@@ -29,24 +29,24 @@ process {
     # Get Operating System Product Name
     $OS = (Get-CimInstance -ClassName 'Win32_OperatingSystem').Name.Split('|')[0]
 
-    # Rename Built-in Administrator Account
-    $adminAccount = Get-LocalUser | Where-Object { $_.SID -like 'S-1-5-*-500' }
-        Rename-LocalUser -SID $adminAccount.Sid.Value -NewName "_Administrator"
-        Write-Host "Renamed Administrator account"
+    # # Rename Built-in Administrator Account
+    # $adminAccount = Get-LocalUser | Where-Object { $_.SID -like 'S-1-5-*-500' }
+    #     Rename-LocalUser -SID $adminAccount.Sid.Value -NewName "_Administrator"
+    #     Write-Host "Renamed Administrator account"
 
-        # Disable Built-in Administrator Account
-        Disable-LocalUser -SID $adminAccount.Sid.Value
-        Write-Host "Disabled SID500 Administrator account"
+    #     # Disable Built-in Administrator Account
+    #     Disable-LocalUser -SID $adminAccount.Sid.Value
+    #     Write-Host "Disabled SID500 Administrator account"
 
-        # Remove Built-in Admin Profile
-        Get-CimInstance -Class Win32_UserProfile | Where-Object { $_.SID -like "$($adminAccount.Sid.Value)" } | Remove-CimInstance
-        Write-Host "Removed SID500 Administrator account profile"
+    #     # Remove Built-in Admin Profile
+    #     Get-CimInstance -Class Win32_UserProfile | Where-Object { $_.SID -like "$($adminAccount.Sid.Value)" } | Remove-CimInstance
+    #     Write-Host "Removed SID500 Administrator account profile"
 
-    # Create New Admin
-    New-LocalUser $adminAccount.Name -Password (ConvertTo-SecureString $pw -AsPlainText -Force) -Description "Local Administrator" -PasswordNeverExpires
-    Add-LocalGroupMember -Group 'Administrators' -Member $adminAccount.Name
-    Remove-LocalGroupMember -Group 'Users' -Member $adminAccount.Name -ErrorAction SilentlyContinue
-    Write-Host "Created new local Administrator account"
+    # # Create New Admin
+    # New-LocalUser $adminAccount.Name -Password (ConvertTo-SecureString $pw -AsPlainText -Force) -Description "Local Administrator" -PasswordNeverExpires
+    # Add-LocalGroupMember -Group 'Administrators' -Member $adminAccount.Name
+    # Remove-LocalGroupMember -Group 'Users' -Member $adminAccount.Name -ErrorAction SilentlyContinue
+    # Write-Host "Created new local Administrator account"
 
     # Rename Guest Account
     $guestAccount = Get-LocalUser | Where-Object { $_.SID -like 'S-1-5-*-501' }
