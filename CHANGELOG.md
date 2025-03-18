@@ -1,3 +1,9 @@
+## v0.5.3 (2025-03-18)
+
+### Refactor
+
+- comment out sensitive operations in windows-base.ps1 and add fslogix-entra-id.ps1 script (#16)
+
 ## v0.5.2 (2025-03-07)
 
 ### Refactor
