@@ -1,3 +1,9 @@
+## v0.5.6 (2025-03-19)
+
+### Refactor
+
+- update tags in EntraIDWindowsCredentialManager.ps1 for clarity (#19)
+
 ## v0.5.5 (2025-03-19)
 
 ### Refactor
