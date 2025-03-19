@@ -1,3 +1,9 @@
+## v0.5.7 (2025-03-19)
+
+### Refactor
+
+- update documentation and clean up commented-out code in windows-base.ps1 (#20)
+
 ## v0.5.6 (2025-03-19)
 
 ### Refactor
