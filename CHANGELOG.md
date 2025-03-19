@@ -1,3 +1,9 @@
+## v0.5.4 (2025-03-19)
+
+### Refactor
+
+- remove fslogix-entra-id.ps1 script and add EntraIDWindowsCredentialManager.ps1 for credential management (#17)
+
 ## v0.5.3 (2025-03-18)
 
 ### Refactor
