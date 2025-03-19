@@ -14,14 +14,14 @@ begin {
     # profile
     $profFileServer = "$($SecureVars.fslogixProfSAName).file.core.windows.net"
     $profUser = "localhost\$($SecureVars.fslogixProfSAName)"
-    $profSecret = "$($SecureVars.fslogixProfSAKey)"
+    $profSecret = $SecureVars.fslogixProfSAKey
 
     # odfc
     $odfcFileServer = "$($SecureVars.fslogixODFCSAName).file.core.windows.net"
     $odfcUser = "localhost\$($SecureVars.fslogixODFCSAName)"
-    $odfcSecret = "$($SecureVars.fslogixODFCSAKey)"
+    $odfcSecret = $SecureVars.fslogixODFCSAKey
 
-    $scriptName = "fslogix-entra-id"
+    $scriptName = "EntraIDWindowsCredentialManager"
 
     # Start powershell logging
     $SaveVerbosePreference = $VerbosePreference
