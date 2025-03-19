@@ -4,7 +4,7 @@
     .DESCRIPTION
         #description: FSLogix Entra ID storage account key.
         #execution mode: Combined
-        #tags: Language
+        #tags: EntraID
 
     .NOTES
         This Script will add the credentials for the storage account into the Windows Credential Manager.
