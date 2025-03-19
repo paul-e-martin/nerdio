@@ -1,3 +1,9 @@
+## v0.5.5 (2025-03-19)
+
+### Refactor
+
+- update variable assignments and script name in EntraIDWindowsCredentialManager.ps1 (#18)
+
 ## v0.5.4 (2025-03-19)
 
 ### Refactor
