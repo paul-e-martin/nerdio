@@ -1,11 +1,16 @@
 <#
+     .SYNOPSIS
+        Windows base setup script.
     .DESCRIPTION
-    Windows Hardening Script
+        #description: Windows base setup.
+        #execution mode: Combined
+        #tags: Windows
+
+    .NOTES
+        This Script will configure base windows settings.
 #>
 
 begin {
-    # $pw = $SecureVars.windowsPassword
-
     $scriptName = "windows-base"
 
     # Start powershell logging
@@ -29,25 +34,6 @@ process {
     # Get Operating System Product Name
     $OS = (Get-CimInstance -ClassName 'Win32_OperatingSystem').Name.Split('|')[0]
 
-    # # Rename Built-in Administrator Account
-    # $adminAccount = Get-LocalUser | Where-Object { $_.SID -like 'S-1-5-*-500' }
-    #     Rename-LocalUser -SID $adminAccount.Sid.Value -NewName "_Administrator"
-    #     Write-Host "Renamed Administrator account"
-
-    #     # Disable Built-in Administrator Account
-    #     Disable-LocalUser -SID $adminAccount.Sid.Value
-    #     Write-Host "Disabled SID500 Administrator account"
-
-    #     # Remove Built-in Admin Profile
-    #     Get-CimInstance -Class Win32_UserProfile | Where-Object { $_.SID -like "$($adminAccount.Sid.Value)" } | Remove-CimInstance
-    #     Write-Host "Removed SID500 Administrator account profile"
-
-    # # Create New Admin
-    # New-LocalUser $adminAccount.Name -Password (ConvertTo-SecureString $pw -AsPlainText -Force) -Description "Local Administrator" -PasswordNeverExpires
-    # Add-LocalGroupMember -Group 'Administrators' -Member $adminAccount.Name
-    # Remove-LocalGroupMember -Group 'Users' -Member $adminAccount.Name -ErrorAction SilentlyContinue
-    # Write-Host "Created new local Administrator account"
-
     # Rename Guest Account
     $guestAccount = Get-LocalUser | Where-Object { $_.SID -like 'S-1-5-*-501' }
     if ($guestAccount.Name -eq "Guest") {
@@ -60,7 +46,7 @@ process {
     Write-Host "Disabled Guest account"
 
     # Set time source
-    $Computer = Get-WmiObject -Namespace root\cimv2 -Class Win32_ComputerSystem
+    $Computer = Get-CimInstance -ClassName Win32_ComputerSystem
     if ($Computer.Domain -ne "WORKGROUP") {
         Set-ItemProperty -LiteralPath 'Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\W32Time\Parameters\' -Name "Type" -Value 'NT5DS' -ErrorAction SilentlyContinue
         Set-ItemProperty -LiteralPath 'Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\W32Time\TimeProviders\VMICTimeProvider\' -Name "Enabled" -Value 0 -ErrorAction SilentlyContinue
