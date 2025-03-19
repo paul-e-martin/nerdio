@@ -12,14 +12,14 @@
 
 begin {
     # profile
-    $profFileServer = "$($SecureVars.'fslogix-prof-sa-name').file.core.windows.net"
-    $profUser = "localhost\$($SecureVars.'fslogix-prof-sa-name')"
-    $profSecret = "$($SecureVars.'fslogix-prof-sa-key')"
+    $profFileServer = "$($SecureVars.fslogixProfSAName).file.core.windows.net"
+    $profUser = "localhost\$($SecureVars.fslogixProfSAName)"
+    $profSecret = "$($SecureVars.fslogixProfSAKey)"
 
     # odfc
-    $odfcFileServer = "$($SecureVars.'fslogix-odfc-sa-name').file.core.windows.net"
-    $odfcUser = "localhost\$($SecureVars.'fslogix-odfc-sa-name')"
-    $odfcSecret = "$($SecureVars.'fslogix-odfc-sa-key')"
+    $odfcFileServer = "$($SecureVars.fslogixODFCSAName).file.core.windows.net"
+    $odfcUser = "localhost\$($SecureVars.fslogixODFCSAName)"
+    $odfcSecret = "$($SecureVars.fslogixODFCSAKey)"
 
     $scriptName = "fslogix-entra-id"
 
@@ -41,6 +41,15 @@ begin {
 }
 
 process {
+    # Check if the key exists
+    if (-not(Test-Path "HKLM:\Software\Policies\Microsoft\AzureADAccount")) {
+        # Create the key if it doesn't exist
+        New-Item -Path "HKLM:\Software\Policies\Microsoft\AzureADAccount" -Force
+    }
+
+    # Add or modify the property
+    New-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\AzureADAccount" -Name "LoadCredKeyFromProfile" -Value 1 -Type DWord -Force
+
     # profile
     try {
         cmd.exe /c "cmdkey.exe /add:$profFileServer /user:$($profUser) /pass:$($profSecret)"
